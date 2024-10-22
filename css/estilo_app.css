@@ -1,0 +1,87 @@
+section {
+    box-sizing: border-box;
+}
+
+.container_noticias {
+    max-width: 1200px;
+    margin: auto;
+}
+.notice {
+    text-align: center;
+    color: #333;
+    border-bottom: 1px solid black;
+}
+.container-header {
+    display: flex;
+    justify-content: space-between;
+}
+
+.notice-nav {
+    text-align: center;
+    margin-bottom: 20px;
+}
+.notice-nav span {
+    display: inline-block;
+    background-color: #333;
+    color: #fff;
+    padding: 5px 10px;
+    margin: 0 5px;
+    cursor: pointer;
+    border-radius: 30px;
+    transition: .3s ease;
+}
+.notice-nav span:hover {
+    background-color: #0b76a6;
+    font-size: 20px;
+}
+.container-header input {
+    padding: 5px 10px;
+    border: none;
+    border: 2px solid #ccc;
+    border-radius: 30px;
+}
+.container-header button {
+    border: none;
+    padding: 7px 10px;
+    border-radius: 30px;
+    border: 2px solid #ccc;
+}
+.contenedor-noticias {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px,1fr));
+    grid-gap: 30px;
+    padding-bottom: 20px;
+}
+.contenedor-noticias .item{
+    background-color: #eee;
+    max-width: 360px;
+    border: 2px solid #ccc;
+    border-radius: 10px;
+    padding: 10px;
+    cursor: pointer;
+    transition: .3s;
+}
+.contenedor-noticias .item:hover {
+    box-shadow: 0 0 10px 5px #ccc;
+}
+.contenedor-noticias .item:hover h2 {
+    text-decoration: underline;
+}
+.contenedor-noticias .item .info_item {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 10px;
+}
+
+.contenedor-noticias .item img {
+    width: 100%;
+}
+
+.contenedor-noticias #btnSiguiente {
+    cursor: pointer;
+    transition: .3s ease;
+}
+.contenedor-noticias #btnSiguiente:hover {
+    color: red;
+    font-size: 20px;
+}
