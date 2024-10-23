@@ -47,29 +47,50 @@
 
             </div>
 		</article> <!-- /article -->
-        <div id="disqus_thread"></div>
-        <script id="dsq-count-scr" src="//EXAMPLE.disqus.com/count.js" async></script>
-        <script>
-            /**
-            *  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
-            *  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables    */
-            /*
-            var disqus_config = function () {
-            this.page.url = PAGE_URL;  // Replace PAGE_URL with your page's canonical URL variable
-            this.page.identifier = PAGE_IDENTIFIER; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
-            };
-            */
-            (function() { // DON'T EDIT BELOW THIS LINE
-            var d = document, s = d.createElement('script');
-            s.src = 'https://pages.disqus.com/embed.js';
-            s.setAttribute('data-timestamp', +new Date());
-            (d.head || d.body).appendChild(s);
-            })();
-        </script>
-        <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
-	</section> <!-- / #main-content -->
+        
+		<div class="container">
+            <h1>Comentarios</h1>
+            <div id="comentarios">
+                <!-- Aquí se mostrarán los comentarios -->
+            </div>
+            <h2>Deja tu comentario:</h2>
+            <form id="formulario">
+                <label for="nombre">Nombre:</label><br>
+                <input type="text" id="nombre" name="nombre" required><br>
+                <label for="comentario">Comentario:</label><br>
+                <textarea id="comentario" name="comentario" rows="4" required></textarea><br><br>
+                <button type="submit">Enviar Comentario</button>
+            </form>
+        </div>
 
 	<script src="../js/script_nav.js"></script>
+
+	<script>
+    const formulario = document.getElementById('formulario');
+        const comentariosContainer = document.getElementById('comentarios');
+        
+        formulario.addEventListener('submit', (event) => {
+            event.preventDefault(); // Evita el envío del formulario por defecto
+        
+            // Obtiene los valores del formulario
+            const nombre = document.getElementById('nombre').value;
+            const comentario = document.getElementById('comentario').value;
+        
+            // Crea un nuevo elemento de comentario
+            const nuevoComentario = document.createElement('div');
+            nuevoComentario.classList.add('comentario');
+            nuevoComentario.innerHTML = `
+                <div class="nombre-comentario">${nombre}</div>
+                <p>${comentario}</p>
+            `;
+        
+            // Añade el nuevo comentario a la lista
+            comentariosContainer.appendChild(nuevoComentario);
+        
+            // Limpia el formulario
+            formulario.reset();
+        });
+        </script>
 	
 	<footer class="pie-pagina">
         <div class="grupo-1">
