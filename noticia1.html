@@ -48,14 +48,16 @@
             </div>
 		</article> <!-- /article -->
         
-		<div class="container">
-            <h1>Comentarios</h1>
+		<hr>
+        <div class="container">
+            <h1>Opiniones</h1>
             <div id="comentarios">
                 <!-- Aquí se mostrarán los comentarios -->
             </div>
+            <hr>
             <h2>Deja tu comentario:</h2>
             <form id="formulario">
-                <label for="nombre">Nombre:</label><br>
+                <label for="nombre">Nombre:</label><br> 
                 <input type="text" id="nombre" name="nombre" required><br>
                 <label for="comentario">Comentario:</label><br>
                 <textarea id="comentario" name="comentario" rows="4" required></textarea><br><br>
@@ -67,29 +69,45 @@
 
 	<script>
     const formulario = document.getElementById('formulario');
-        const comentariosContainer = document.getElementById('comentarios');
-        
-        formulario.addEventListener('submit', (event) => {
-            event.preventDefault(); // Evita el envío del formulario por defecto
-        
-            // Obtiene los valores del formulario
-            const nombre = document.getElementById('nombre').value;
-            const comentario = document.getElementById('comentario').value;
-        
-            // Crea un nuevo elemento de comentario
-            const nuevoComentario = document.createElement('div');
-            nuevoComentario.classList.add('comentario');
-            nuevoComentario.innerHTML = `
-                <div class="nombre-comentario">${nombre}</div>
-                <p>${comentario}</p>
-            `;
-        
-            // Añade el nuevo comentario a la lista
-            comentariosContainer.appendChild(nuevoComentario);
-        
-            // Limpia el formulario
-            formulario.reset();
-        });
+const comentariosDiv = document.getElementById('comentarios');
+
+// Cargar comentarios al iniciar
+async function loadComments() {
+    const response = await fetch('/comments');
+    const comments = await response.json();
+    comments.forEach(comment => addCommentToDiv(comment));
+}
+
+// Agregar comentario
+async function addComment(event) {
+    event.preventDefault();
+    const nombre = document.getElementById('nombre').value;
+    const comentario = document.getElementById('comentario').value;
+
+    const data = { nombre, comentario };
+
+    await fetch('/add-comment', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(data),
+    });
+
+    addCommentToDiv(data);
+    formulario.reset(); // Limpiar el formulario
+}
+
+// Agregar un comentario al DOM
+function addCommentToDiv({ nombre, comentario }) {
+    const div = document.createElement('div');
+    div.classList.add('comentario');
+    div.innerHTML = `<strong>${nombre}</strong>: <p>${comentario}</p>`;
+    comentariosDiv.appendChild(div);
+}
+
+formulario.addEventListener('submit', addComment);
+window.onload = loadComments;
         </script>
 	
 	<footer class="pie-pagina">
